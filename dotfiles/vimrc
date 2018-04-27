@@ -1,0 +1,254 @@
+set nocompatible
+set ruler
+set paste&
+set autoread
+set cursorline
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*.o,*.obj,*.bak,*.exe
+set scrolloff=2
+set showmatch
+set title
+
+" Make it obvious where 100 characters is
+set splitright
+set splitbelow
+
+set ignorecase
+set smartcase
+set smartindent
+set smarttab
+
+filetype off
+let mapleader = ","
+call plug#begin('~/.vim/plugged')
+Plug 'rstacruz/sparkup'
+Plug 'junegunn/goyo.vim'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'xolox/vim-misc'
+Plug 'reedes/vim-pencil'
+Plug 'panozzaj/vim-autocorrect'
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'Chiel92/vim-autoformat'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'stevearc/vim-arduino'
+Plug 'cskeeters/vim-smooth-scroll'
+set backspace=indent,eol,start
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/syntastic'
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'valloric/youcompleteme'
+Plug 'ervandew/supertab'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tomtom/tcomment_vim'
+
+Plug 'majutsushi/tagbar'
+Plug 'schickling/vim-bufonly'
+Plug 'wesQ3/vim-windowswap'
+Plug 'SirVer/ultisnips'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'godlygeek/tabular'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'benmills/vimux'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'gilsondev/searchtasks.vim'
+Plug 'tpope/vim-dispatch'
+
+
+Plug 'jakedouglas/exuberant-ctags'
+Plug 'honza/vim-snippets'
+
+Plug 'jiangmiao/auto-pairs'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'xolox/vim-notes'
+Plug 'junegunn/rainbow_parentheses.vim'
+
+" The following are examples of different formats supported.
+" Keep Plug commands between vundle#begin/end.
+" plugin on GitHub repo
+Plug 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plug 'L9'
+" Git plugin not hosted on GitHub
+call plug#end()
+
+filetype plugin indent on
+syntax on
+syntax enable
+set background=dark
+set t_Co=256
+colorscheme solarized
+autocmd vimenter * NERDTree
+augroup rainbow_lisp
+  autocmd!
+  autocmd FileType lisp,clojure,scheme,c++,c,javascript RainbowParentheses
+augroup END
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+set number
+let g:airline_theme='murmur'
+set encoding=utf8
+" Show linenumbers
+ set number
+ set ruler
+"
+" " Set Proper Tabs
+ set tabstop=4
+ set shiftwidth=4
+ set smarttab
+ set expandtab
+"
+" " Always display the status line
+ set laststatus=2
+
+ set cursorline
+
+set mouse=a
+
+" Syntastic Configuration
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers=['eslint']
+
+
+autocmd filetype css setlocal omnifunc=csscomplete#completecss
+autocmd filetype html,markdown setlocal omnifunc=htmlcomplete#completetags
+autocmd filetype javascript setlocal omnifunc=javascriptcomplete#completejs
+autocmd filetype python setlocal omnifunc=pythoncomplete#complete
+autocmd filetype xml setlocal omnifunc=xmlcomplete#completetags
+
+
+let g:UltiSnipsExpandTrigger = "<C-l>"
+let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+
+let g:ultisnipseditsplit="vertical" " if you want :ultisnipsedit to split your window.
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" default fzf layout
+" " - down / up / left / right
+" let g:fzf_layout = { 'down': '~40%' }
+"
+" " in neovim, you can set up fzf window using a vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+
+let g:fzf_colors =
+			\ { 'fg':      ['fg', 'normal'],
+  \ 'bg':      ['bg', 'normal'],
+  \ 'hl':      ['fg', 'comment'],
+  \ 'fg+':     ['fg', 'cursorline', 'cursorcolumn', 'normal'],
+  \ 'bg+':     ['bg', 'cursorline', 'cursorcolumn'],
+  \ 'hl+':     ['fg', 'statement'],
+  \ 'info':    ['fg', 'preproc'],
+  \ 'prompt':  ['fg', 'conditional'],
+  \ 'pointer': ['fg', 'exception'],
+  \ 'marker':  ['fg', 'keyword'],
+  \ 'spinner': ['fg', 'label'],
+  \ 'header':  ['fg', 'comment'] }
+
+nmap <leader>ne :NERDTree<cr>
+nmap <leader>nt :NERDTreeToggle<cr>
+map <c-n> :NERDTreeToggle<cr>
+map <c-m> :TagbarToggle<cr>
+nmap <leader>sc :SyntasticCheck<cr>
+nmap <leader>ln :lnext<cr>
+nmap <leader>lp :lprev<cr>
+nmap <leader>lo :lopen<cr>
+nmap <leader>lw :lwindow<cr>
+
+" omnicomplete better nav
+ inoremap <expr> <c-j> ("\<c-n>")
+ inoremap <expr> <c-k> ("\<c-p>")"
+nnoremap <leader>o :files
+nnoremap <leader>o :ctrlp
+nnoremap <leader>w :w<cr>
+
+" insert mode completion
+ imap <c-x><c-k> <plug>(fzf-complete-word)
+ imap <c-x><c-f> <plug>(fzf-complete-path)
+ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+ imap <c-x><c-l> <plug>(fzf-complete-line)
+"
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+" omnicomplete better nav
+" " - down / up / left / right
+ let g:fzf_layout = { 'down': '~40%' }
+"
+" " in neovim, you can set up fzf window using a vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+
+let g:fzf_colors =
+			\ { 'fg':      ['fg', 'normal'],
+  \ 'bg':      ['bg', 'normal'],
+  \ 'hl':      ['fg', 'comment'],
+  \ 'fg+':     ['fg', 'cursorline', 'cursorcolumn', 'normal'],
+  \ 'bg+':     ['bg', 'cursorline', 'cursorcolumn'],
+  \ 'hl+':     ['fg', 'statement'],
+  \ 'info':    ['fg', 'preproc'],
+  \ 'prompt':  ['fg', 'conditional'],
+  \ 'pointer': ['fg', 'exception'],
+  \ 'marker':  ['fg', 'keyword'],
+  \ 'spinner': ['fg', 'label'],
+  \ 'header':  ['fg', 'comment'] }
+
+
+set timeoutlen=1000 ttimeoutlen=0
+
+
+let g:nerdtreehijacknetrw=0
+" omnicomplete better nav
+nnoremap <buffer> <leader>am :arduinoverify<cr>
+nnoremap <buffer> <leader>au :arduinoupload<cr>
+nnoremap <buffer> <leader>ad :arduinouploadandserial<cr>
+nnoremap <buffer> <leader>ab :arduinochooseboard<cr>
+nnoremap <buffer> <leader>ap :ArduinoChooseProgrammer<CR>
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_completion=1
+
+nmap <leader>rp :RainbowParentheses!!
+" nnoremap <CR> o<Esc>
+augroup AutoCorrect
+  autocmd!
+  autocmd FileType markdown,mkd,text call AutoCorrect()
+  autocmd FileType textile call AutoCorrect()
+augroup END
+
+nnoremap <C-s> [s1z=<c-o>
+inoremap <C-s> <c-g>u<Esc>[s1z=`]A<c-g>u
+
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+let g:pencil#textwidth = 120
+call togglebg#map("<F5>")
+
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init({'wrap': 'soft'})
+  autocmd FileType text         call pencil#init({'wrap': 'soft'})
+augroup END
+
+nmap <leader>f :Files<cr>
+nmap <leader>g :Goyo 120<cr>
+let vim_markdown_preview_hotkey='<leader>md'
+let vim_markdown_preview_temp_file=1
+let vim_markdown_preview_pandoc=1
+
+let vim_markdown_preview_browser='Google Chrome'
+let vim_markdown_preview_toggle=2
