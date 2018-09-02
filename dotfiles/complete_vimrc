@@ -41,6 +41,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'valloric/youcompleteme'
 Plug 'ervandew/supertab'
+Plug 'gmarmstrong/vim-muse'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tomtom/tcomment_vim'
 
