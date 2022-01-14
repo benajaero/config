@@ -44,7 +44,7 @@ Plug 'stevearc/vim-arduino'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'xolox/vim-misc'
 Plug 'panozzaj/vim-autocorrect'
 Plug 'Chiel92/vim-autoformat' 
@@ -64,7 +64,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'Valloric/MatchTagAlways'
 
 
-Plug 'xolox/vim-easytags'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'honza/vim-snippets'
 
 Plug 'jiangmiao/auto-pairs'
@@ -82,6 +82,8 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'preservim/nerdtree'
 
 Plug 'ryanoasis/vim-devicons'
+
+Plug '/alvan/vim-closetag'
 " The following are examples of different formats supported.
 " Keep Plug commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -105,8 +107,10 @@ let g:rbpt = 16
 let g:airline_theme='murmur'
 let g:airline_powerline_fonts = 1
 
-let g:indentLine_char = '⎸'
-let g:indentLine_setColors = 1
+"let g:indentLine_char = '⎸'
+"let g:indentLine_color_term = 239
+
+"let g:indentLine_setColors = 1
 "let g:indentLine_color_gui = '#1F297D'
 
 
@@ -391,3 +395,36 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 let g:NERDTreeQuitOnOpen = 1
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
