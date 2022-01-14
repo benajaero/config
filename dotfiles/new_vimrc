@@ -26,7 +26,6 @@ set smarttab
 set expandtab
 set laststatus=2
 set mouse=a
-
 set guifont=Fira\ Code\ Retina:h13
 
 
@@ -105,6 +104,12 @@ let g:rbpt = 16
 "let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 let g:airline_theme='murmur'
 let g:airline_powerline_fonts = 1
+
+let g:indentLine_char = '⎸'
+let g:indentLine_setColors = 1
+"let g:indentLine_color_gui = '#1F297D'
+
+
 
 autocmd filetype css setlocal omnifunc=csscomplete#completecss
 autocmd filetype html,markdown setlocal omnifunc=htmlcomplete#completetags
